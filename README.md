@@ -1,8 +1,8 @@
 # cholesky-solve[WIP]
 
-This modules solves sparse symmetric positive definite linear systems,
+This module solves sparse symmetric positive definite linear systems,
 by finding the Cholesky decomposition, and then doing forward
-substitution and backward substitution. It is basically a javascript
+substitution and backward substitution. It is basically a Javascript
 port of the paper "Algorithm 8xx: a concise sparse Cholesky
 factorization package". This kind of solver has many applications in
 digital geometry processing.
@@ -52,14 +52,15 @@ var P = require('cuthill-mckee')(M, n)
 console.log(choleskySolve(M, b, n, P))
 ```
 
+## API
+
 ### `require("cholesky-solve")(M, b, n, [P])`
-Solves the equation `Mx = b` by conjugate gradient
+Solves the equation `Mx = b` by using the Cholesky decomposition.
 
 * `M` a list of the matrix coefficients of the sparse matrix `M`.
 * `b` the vector on the right-hand side. A regular array of length `n`
 * `n` the dimension of the matrix `M`
-* `P` encodes a permutation matrix that preconditions `M` before the
-* Cholesky decomposition is solved for. A possible algorithm for finding a good permutation is
+* `P` encodes a permutation matrix that preconditions `M` before the Cholesky decomposition is solved for. A possible algorithm for finding a good permutation is
 [Cuthill–McKee](https://en.wikipedia.org/wiki/Cuthill%E2%80%93McKee_algorithm). See
 the module [cuthill-mckee](https://github.com/mikolalysenko/cuthill-mckee) for a
 Javascript implementation.
