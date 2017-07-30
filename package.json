@@ -24,7 +24,7 @@
     "solver",
     "linear",
     "system",
-    "cholesky",
+    "cholesky"
   ],
   "author": "Eric Arnebäck",
   "license": "MIT",
