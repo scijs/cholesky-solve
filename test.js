@@ -7,8 +7,13 @@ var rng = new require('xorshift').constructor([1, 0, 2, 0]);
 
 var eps = 1e-5
 
+function choleskySolveHelper(M, b, n, P) {
+  var solve = choleskySolve.prepare(M, n, P)
+  return solve(b)
+}
+
 function solveAndAssert(t, n, M, b, P, expectedSolution) {
-  var foundSolution = choleskySolve(M, b, n, P)
+  var foundSolution = choleskySolveHelper(M, b, n, P)
 
   for(var i=0; i< n; ++i) {
     t.assert(almostEqual(expectedSolution[i], foundSolution[i], eps, eps), "solution element " + i + ": "+ expectedSolution[i] + " = " + foundSolution[i])
@@ -155,7 +160,7 @@ test('solve1000x1000matrix', function(t) {
 
   var P = require('cuthill-mckee')(M, n)
   // solve.
-  var foundSolution = choleskySolve(M, b, n, P)
+  var foundSolution = choleskySolveHelper(M, b, n, P)
 
   // check that the residual vector is 0.
   for(var i = 0; i < n; ++i) {

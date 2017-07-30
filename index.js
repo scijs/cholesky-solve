@@ -161,19 +161,19 @@ function ldl_perm
 }
 
 function ldl_permt(
-    n,		/* size of X, B, and P */
-    X,	/* output of size n. */
-    B,	/* input of size n. */
-    P	/* input permutation array of size n. */
+  n,		/* size of X, B, and P */
+  X,	/* output of size n. */
+  B,	/* input of size n. */
+  P	/* input permutation array of size n. */
 ) {
-    var j
-    for (j = 0; j < n; j++)
-    {
-	X [P[j]] = B[j]
-    }
+  var j
+  for (j = 0; j < n; j++)
+  {
+    X [P[j]] = B[j]
+  }
 }
 
-function choleskySolve (M, b, n, P) {
+function prepare (M, n, P) {
   const ANZ = M.length
 
   // if a permutation was specified, apply it.
@@ -269,16 +269,19 @@ function choleskySolve (M, b, n, P) {
   d = ldl_numeric(n, Ap, Ai, Ax, Lp, Parent, Lnz, Li, Lx, D, Y, Pattern, Flag)
 
   if (d === n) {
-    ldl_perm(n, bp1, b, P);
-    ldl_lsolve(n, bp1, Lp, Li, Lx)
-    ldl_dsolve(n, bp1, D)
-    ldl_ltsolve(n, bp1, Lp, Li, Lx)
-    ldl_permt(n, x, bp1, P);
+    return function(b) {
+      ldl_perm(n, bp1, b, P);
+      ldl_lsolve(n, bp1, Lp, Li, Lx)
+      ldl_dsolve(n, bp1, D)
+      ldl_ltsolve(n, bp1, Lp, Li, Lx)
+      ldl_permt(n, x, bp1, P);
 
-    return x
+      return x
+    }
+
   } else {
     return null
   }
 }
 
-module.exports = choleskySolve
+module.exports.prepare = prepare
