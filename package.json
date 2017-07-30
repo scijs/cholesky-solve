@@ -1,6 +1,6 @@
 {
   "name": "cholesky-solve",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "This module solves sparse symmetric positive definite linear systems by using the Cholesky decomposition",
   "main": "index.js",
   "scripts": {
