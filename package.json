@@ -1,0 +1,36 @@
+{
+  "name": "cholesky-solve",
+  "version": "0.1.0",
+  "description": "This module solves sparse symmetric positive definite linear systems by using the Cholesky decomposition",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "devDependencies": {
+    "almost-equal": "^1.1.0",
+    "cuthill-mckee": "^1.0.0",
+    "tape": "^4.7.0",
+    "xorshift": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erkaman/cholesky-solve.git"
+  },
+  "keywords": [
+    "numerical",
+    "computing",
+    "sparse",
+    "matrix",
+    "solver",
+    "linear",
+    "system",
+    "cholesky",
+  ],
+  "author": "Eric Arnebäck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Erkaman/cholesky-solve"
+  },
+  "homepage": "https://github.com/Erkaman/cholesky-solve"
+
+}
