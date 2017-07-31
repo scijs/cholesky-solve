@@ -19,7 +19,28 @@ var choleskySolve = require('cholesky-solve')
 // matrix dimension.
 const n = 10
 
-// sparse matrix on left-hand side
+/*
+Below we specify the sparse matrix:
+
+1.7  0    0    0    0    0    0    0    0.13 0
+0    1.0  0    0    0.02 0    0    0    0    0.01
+0    0    1.5  0    0    0    0    0    0    0
+0    0    0    1.1  0    0    0    0    0    0
+0    0.02 0    0    2.6  0    0.16 0.09 0.52 0.53
+0    0    0    0    0    1.2  0    0    0    0
+0    0    0    0    0.16 0    1.3  0    0    0.56
+0    0    0    0    0.09 0    0    1.6  0.11 0
+0.13 0    0    0    0.52 0    0    0.11 1.4  0
+0    0.01 0    0    0.53 0    0.56 0    0    3.1
+
+Note that we only specify the coefficients on the diagonal, 
+or above the diagonal. Since the matrix is symmetric,
+specifying the coefficients below the diagonal is completely redundant. 
+Finally, the order in which the coefficients is specified in is not important.
+
+*/
+
+// the sparse matrix on left-hand side.
 var M = [
   [2, 2, 1.5],
   [1, 1, 1.0],
@@ -65,7 +86,9 @@ Decomposes `M` into the Cholesky decomposition of the form `LDL^T`. A
 function is returned that can be used to solve the equation `Mx = b`,
 for some given value of `b`.
 
-* `M` a list of the matrix coefficients of the sparse matrix `M`.
+* `M` a list of the matrix coefficients of the sparse matrix `M`. These are
+the coefficients on the diagonal and above the diagonal. The ones below the
+diagonal do not need to be specified, since the matrix is symmetric. 
 * `n` the dimension of the matrix `M`
 * `P` encodes a permutation matrix that preconditions `M` before the Cholesky decomposition is solved for. A possible algorithm for finding a good permutation is
 [Cuthill–McKee](https://en.wikipedia.org/wiki/Cuthill%E2%80%93McKee_algorithm). See
