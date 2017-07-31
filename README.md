@@ -97,3 +97,5 @@ Javascript implementation.
 
 **Returns** A function that takes a single argument `b`. The function
   returns the solution to the equation `Mx = b`, encoded as a simple array.
+  
+**NOTE** the module does no sanity checking on the input arguments. It is assumed that the user knows what he/she is doing!
